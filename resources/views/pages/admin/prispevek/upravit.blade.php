@@ -19,7 +19,7 @@
                     <label for="nazev" class="form-label">Název</label>
                     <input type="text" id="prispevek_nazev" name="title" value="{{ $post->title }}"
                         class="form-control" required
-                        oninput="adminPanel.createPostSlug(document.getElementById('prispevek_nazev'), document.getElementById('prispevek_slug'), {{ $post->id }})">
+                        oninput="adminPanel.createPostSlug(document.getElementById('prispevek_nazev'), document.getElementById('prispevek_slug'))">
                 </div>
                 <div class="mb-3">
                     <label for="slug" class="form-label">Slug</label>
@@ -45,6 +45,10 @@
                     </div>
                     <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal"
                         data-bs-target="#imageModal">Vybrat obrázek</button>
+                </div>
+                <div class="mb-3">
+                    <label for="acting_at" class="form-label">Datum premiéry</label>
+                    <input type="date" id="acting_at" name="acting_at" value="{{ $post->acting_at }}" class="form-control">
                 </div>
                 <div class="mb-3">
                     <label for="slug" class="form-label">Adresa traileru na YouTube</label>

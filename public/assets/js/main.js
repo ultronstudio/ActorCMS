@@ -19,7 +19,15 @@ class AdminPanel {
                 case ' ':
                     nazevPole[i] = '-';
                     break;
+                case '\'':
+                case '\"':
+                case '\\':
+                case '\(':
+                case '\)':
+                    nazevPole[i] = '';
+                    break;
                 case 'á':
+                case 'ä':
                     nazevPole[i] = 'a';
                     break;
                 case 'č':
@@ -30,15 +38,18 @@ class AdminPanel {
                     break;
                 case 'ě':
                 case 'é':
+                case 'ë':
                     nazevPole[i] = 'e';
                     break;
                 case 'í':
+                case 'ï':
                     nazevPole[i] = 'i';
                     break;
                 case 'ň':
                     nazevPole[i] = 'n';
                     break;
                 case 'ó':
+                case 'ö':
                     nazevPole[i] = 'o';
                     break;
                 case 'ř':
@@ -49,9 +60,11 @@ class AdminPanel {
                     break;
                 case 'ú':
                 case 'ů':
+                case 'ü':
                     nazevPole[i] = 'u';
                     break;
                 case 'ý':
+                case 'ÿ':
                     nazevPole[i] = 'y';
                     break;
                 case 'ž':

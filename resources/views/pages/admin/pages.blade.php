@@ -4,10 +4,10 @@
     <div class="container">
         <div class="d-flex align-items-center justify-content-between">
             <div>
-                <h1>Příspěvky na webu</h1>
+                <h1>Stránky webu</h1>
             </div>
             <div>
-                <a href="{{ url('/admin/prispevek/novy') }}" class="btn btn-info">Nový příspěvek</a>
+                <a href="{{ url('/admin/stranka/nova') }}" class="btn btn-info">Nová stránka</a>
             </div>
         </div>
         @if (session('error'))
@@ -33,18 +33,18 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($posts as $post)
+                @foreach ($pages as $page)
                     <tr>
-                        <td>{{ $post->title }}</td>
-                        <td><a href="{{ url('/' . $post->type . '/' . $post->slug) }}"
-                                target="_blank">/{{ $post->type }}/{{ $post->slug }}</a>
+                        <td>{{ $page->title }}</td>
+                        <td><a href="{{ url('/' . $page->slug) }}"
+                                target="_blank">/{{ $page->slug }}</a>
                         </td>
-                        <td>{{ Carbon\Carbon::parse($post->created_at)->locale('cs')->isoFormat('Do. MMMM YYYY v HH:mm:ss') }}
+                        <td>{{ Carbon\Carbon::parse($page->created_at)->locale('cs')->isoFormat('Do. MMMM YYYY v HH:mm:ss') }}
                         </td>
-                        <td>{{ Carbon\Carbon::parse($post->updated_at)->locale('cs')->isoFormat('Do. MMMM YYYY v HH:mm:ss') }}
+                        <td>{{ Carbon\Carbon::parse($page->updated_at)->locale('cs')->isoFormat('Do. MMMM YYYY v HH:mm:ss') }}
                         </td>
                         <td>
-                            <a href="{{ url('/admin/prispevek/upravit/' . $post->id) }}" class="btn btn-success">Upravit</a>
+                            <a href="{{ url('/admin/stranka/upravit/' . $page->id) }}" class="btn btn-success">Upravit</a>
                         </td>
                     </tr>
                 @endforeach

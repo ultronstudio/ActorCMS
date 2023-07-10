@@ -27,6 +27,9 @@
                             <a class="nav-link" href="{{ url('/admin/prispevky') }}">Příspěvky</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/admin/stranky') }}">Stránky</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ url('/admin/nastaveni') }}">Nastavení</a>
                         </li>
                     </ul>

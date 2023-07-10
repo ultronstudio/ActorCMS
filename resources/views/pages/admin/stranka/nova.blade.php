@@ -1,50 +1,24 @@
 @extends('layouts.admin.panel')
-@section('title', 'Nový příspěvek')
+@section('title', 'Nová stránka')
 @section('content')
     <div class="row mt-4">
         <div class="d-flex align-items-center justify-content-between">
             <div>
-                <h3>Nový příspěvek</h3>
+                <h3>Nová stránka</h3>
             </div>
         </div>
         <hr>
         <div class="">
-            <form method="POST" action="{{ url('/admin/prispevek/novy') }}" id="formular-novy_prispevek"
+            <form method="POST" action="{{ url('/admin/stranka/nova') }}" id="formular-nova_stranka"
                 enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                     <label for="nazev" class="form-label">Název</label>
-                    <input type="text" id="prispevek_nazev" name="title" class="form-control" required oninput="adminPanel.createPostSlug(document.getElementById('prispevek_nazev'), document.getElementById('prispevek_slug'))">
+                    <input type="text" id="stranka_nazev" name="title" class="form-control" required oninput="adminPanel.createPostSlug(document.getElementById('stranka_nazev'), document.getElementById('stranka_slug'))">
                 </div>
                 <div class="mb-3">
                     <label for="slug" class="form-label">Slug</label>
-                    <input type="text" id="prispevek_slug" name="slug" class="form-control" required readonly>
-                </div>
-                <div class="mb-3">
-                    <label for="type" class="form-label">Typ příspěvku</label>
-                    <select name="type" id="prispevek_typ" class="form-control">
-                        <option value="film">Film</option>
-                        <option value="serial">Seriál</option>
-                        <option value="divadlo">Divadelní představení
-                        </option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="thumbnail" class="form-label">Náhledový obrázek</label>
-                    <input type="text" name="thumbnail" id="thumbnail" style="display: none;" readonly>
-                    <div id="thumbnail-preview">
-                        <span></span>
-                    </div>
-                    <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal"
-                        data-bs-target="#imageModal">Vybrat obrázek</button>
-                </div>
-                <div class="mb-3">
-                    <label for="acting_at" class="form-label">Datum premiéry</label>
-                    <input type="date" id="acting_at" name="acting_at" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label for="trailer_video" class="form-label">Adresa traileru na YouTube</label>
-                    <input type="text" id="trailer_video" name="trailer_video" class="form-control">
+                    <input type="text" id="stranka_slug" name="slug" class="form-control" required readonly>
                 </div>
                 <div class="mb-3">
                     <label for="type" class="form-label">Obsah</label>
@@ -54,31 +28,6 @@
                     <button type="submit" class="btn btn-success">Vytvořit</button>
                 </div>
             </form>
-            <!-- Modální okno pro výběr a nahrávání obrázků -->
-            <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="imageModalLabel">Výběr obrázku</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- Seznam nahraných obrázků -->
-                            <div id="imageList"></div>
-
-                            <!-- Formulář pro nahrání nového obrázku -->
-                            <form id="uploadForm">
-                                <input type="file" name="image" id="imageInput" accept="image/jpeg"
-                                    class="form-control">
-                                <button type="submit" id="uploadButton" class="btn btn-success mt-3">Nahrát obrázek
-                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
-                                        style="display: none" id="loadingSpinner"></span>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <script>
                 tinymce.init({
                     selector: '#obsah',
@@ -200,100 +149,6 @@
                             }
                         });
                     }
-                });
-            </script>
-            <script>
-                $(document).ready(function() {
-                    var imageList = $('#imageList');
-                    var uploadForm = $('#uploadForm');
-                    var uploadButton = $('#uploadButton');
-                    var loadingMessage = $('#loadingMessage');
-                    var spinner = $('#loadingSpinner');
-
-                    // Funkce pro aktualizaci náhledového obrázku
-                    function updateThumbnail(imageUrl) {
-                        $('#thumbnail-preview').html('<img src="' + imageUrl + '" alt="Thumbnail"  style="max-width: auto; max-height: 175px; width: auto; height: 175px !important;">');
-                        $('#thumbnail').val(imageUrl);
-                    }
-
-                    // Získání seznamu obrázků a jejich zobrazení
-                    $.ajax({
-                        url: '/api/images',
-                        method: 'GET',
-                        success: function(response) {
-                            var images = response.data;
-
-                            if (images) {
-                                if (images.length === 0) {
-                                    imageList.append('<p>Žádné obrázky nejsou k dispozici.</p>');
-                                } else {
-                                    $.each(images, function(index, image) {
-                                        imageList.append(
-                                            '<button type="button" class="btn btn-outline-primary btn-image mx-2 mb-3" data-url="' +
-                                            image.path + '"><img src="' + image.path + '" alt="' +
-                                            image.filename + '" style="max-width: auto; max-height: 75px; width: auto; height: 75px !important;""></button>');
-                                    });
-                                }
-                            } else {
-                                imageList.append('<p>Obrázky se nepodařilo načíst.</p>');
-                            }
-                        }
-                    });
-
-                    // Otevření modalu po kliknutí na tlačítko pro výběr obrázku
-                    $('#imageModal').on('shown.bs.modal', function() {
-                        // Získání cesty k vybranému náhledovému obrázku
-                        var thumbnailUrl = $('#thumbnail').val();
-                        // Přidání třídy "active" k tlačítku náhledového obrázku
-                        $('.btn-image[data-url="' + thumbnailUrl + '"]').addClass('active');
-                    });
-
-                    // Změna náhledového obrázku po kliknutí na tlačítko obrázku v modalu
-                    $(document).on('click', '.btn-image', function() {
-                        var imageUrl = $(this).data('url');
-                        // Odebrání třídy "active" ze všech tlačítek obrázků
-                        $('.btn-image').removeClass('active');
-                        // Přidání třídy "active" k vybranému tlačítku obrázku
-                        $(this).addClass('active');
-                        // Aktualizace náhledového obrázku
-                        updateThumbnail(imageUrl);
-                        // Zavření modálního okna
-                        $('#imageModal').modal('hide');
-                    });
-
-                    // Zpracování odeslání formuláře pro nahrání obrázku
-                    uploadForm.on('submit', function(e) {
-                        e.preventDefault();
-
-                        var formData = new FormData(this);
-                        uploadButton.prop('disabled', true);
-                        spinner.show();
-
-                        $.ajax({
-                            url: '/api/images',
-                            method: 'POST',
-                            data: formData,
-                            processData: false,
-                            contentType: false,
-                            success: function(response) {
-                                /*
-                                var imageUrl = response.data.path;
-                                // Aktualizace náhledového obrázku
-                                updateThumbnail(imageUrl);
-                                */
-                               console.log(response.data);
-                                // Zavření modalu
-                                $('#imageModal').modal('hide');
-                            },
-                            error: function() {
-                                console.error('Nahrávání obrázku se nezdařilo');
-                            },
-                            complete: function() {
-                                uploadButton.prop('disabled', false);
-                                spinner.hide();
-                            },
-                        });
-                    });
                 });
             </script>
         </div>

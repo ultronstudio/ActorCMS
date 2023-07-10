@@ -5,6 +5,7 @@
     <div class="container mb-5">
         <h1>{{ $post->title }}</h1>
         <p style="font-size: 12px">Poslední aktualizace: {{ Carbon\Carbon::parse($post->updated_at)->locale('cs')->isoFormat('Do. MMMM YYYY v HH:mm') }}</p>
+        <p style="font-size: 15px">Premiéra: {{ Carbon\Carbon::parse($post->acting_at)->locale('cs')->isoFormat('Do. MMMM YYYY') }}</p>
         <p>{!! $post->content !!}</p>
         @if ($post->trailer_youtube_url)
             @php

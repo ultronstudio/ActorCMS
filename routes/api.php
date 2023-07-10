@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\ImageController;
+use App\Http\Controllers\Api\UrlController;
 
 
 /*
@@ -18,3 +19,4 @@ use App\Http\Controllers\API\ImageController;
 
 Route::get('/images', [ImageController::class, 'index']);
 Route::post('/images', [ImageController::class, 'upload']);
+Route::get('/urls', [UrlController::class, 'index']);

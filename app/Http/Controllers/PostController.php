@@ -54,6 +54,7 @@ class PostController extends Controller
             $post->type = $request->input('type');
             $post->content = $request->input('content');
             $post->thumbnail = $request->input('thumbnail');
+            $post->acting_at = $request->input('acting_at');
             $post->trailer_youtube_url = $request->input('trailer_video');
             $post->updated_at = Carbon::now();
             $post->save();
@@ -84,6 +85,7 @@ class PostController extends Controller
         $post->type = $request->input('type');
         $post->content = $request->input('content');
         $post->thumbnail = $request->input('thumbnail');
+        $post->acting_at = $request->input('acting_at');
         $post->trailer_youtube_url = $request->input('trailer_video');
         $post->updated_at = Carbon::now();
         $post->save();
