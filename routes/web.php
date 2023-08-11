@@ -53,6 +53,6 @@ Route::group(['middleware' => 'admin.auth'], function () {
     Route::post('/admin/nastaveni/navigace', [NavigationController::class, 'update']);
 });
 
-Route::get('/{postType}/{post}', [PostController::class, 'show'])->where('postType', 'film|serial|divadlo')->where('post', '.*');
+Route::get('/{postType}/{post}', [PostController::class, 'show'])->where('postType', 'film|serial|divadlo|dabing|reklama')->where('post', '.*');
 
 Route::get('/{slug}', [PageController::class, 'showBySlug'])->where('slug', '.*');

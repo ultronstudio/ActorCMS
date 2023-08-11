@@ -43,7 +43,7 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'slug' => 'required|unique:posts,slug,' . $id,
-            'type' => 'required|in:film,serial,divadlo',
+            'type' => 'required|in:film,serial,divadlo,dabing,reklama',
             'thumbnail' => 'nullable|max:2048'
         ]);
 
@@ -75,7 +75,7 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'slug' => 'required|unique:posts,slug',
-            'type' => 'required|in:film,serial,divadlo',
+            'type' => 'required|in:film,serial,divadlo,dabing,reklama',
             'thumbnail' => 'nullable|max:2048'
         ]);
 

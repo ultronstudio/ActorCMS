@@ -25,8 +25,9 @@
                     <select name="type" id="prispevek_typ" class="form-control">
                         <option value="film">Film</option>
                         <option value="serial">Seriál</option>
-                        <option value="divadlo">Divadelní představení
-                        </option>
+                        <option value="divadlo">Divadelní představení</option>
+                        <option value="dabing">Dabing</option>
+                        <option value="reklama">Reklama</option>
                     </select>
                 </div>
                 <div class="mb-3">

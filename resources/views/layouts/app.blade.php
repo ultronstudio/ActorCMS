@@ -17,8 +17,23 @@
     @endif
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link href="https://vjs.zencdn.net/8.3.0/video-js.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
     <script src="https://vjs.zencdn.net/8.3.0/video.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/videojs-youtube@3.0.1/dist/Youtube.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Načtení hodnoty primární barvy z databáze
+            var primaryColor = "{{ $nastaveniWebu->primary_color }}";
+            // Načtení hodnoty sekundární barvy z databáze
+            var secondaryColor = "{{ $nastaveniWebu->secondary_color }}";
+
+            // Vytvoření a přidání stylu do hlavičky
+            var styleTag = document.createElement('style');
+            styleTag.innerHTML = ":root { --bs-primary: " + primaryColor + "; --bs-secondary-color: " +
+                secondaryColor + "; }";
+            document.head.appendChild(styleTag);
+        });
+    </script>
 </head>
 
 <body>

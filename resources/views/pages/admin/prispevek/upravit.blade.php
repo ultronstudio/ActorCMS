@@ -31,8 +31,9 @@
                     <select name="type" id="prispevek_typ" class="form-control">
                         <option value="film" {{ $post->type == 'film' ? 'selected' : false }}>Film</option>
                         <option value="serial" {{ $post->type == 'serial' ? 'selected' : false }}>Seriál</option>
-                        <option value="divadlo" {{ $post->type == 'divadlo' ? 'selected' : false }}>Divadelní představení
-                        </option>
+                        <option value="divadlo" {{ $post->type == 'divadlo' ? 'selected' : false }}>Divadelní představení</option>
+                        <option value="dabing" {{ $post->type == 'dabing' ? 'selected' : false }}>Dabing</option>
+                        <option value="reklama" {{ $post->type == 'reklama' ? 'selected' : false }}>Reklama</option>
                     </select>
                 </div>
                 <div class="mb-3">
@@ -48,7 +49,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="acting_at" class="form-label">Datum premiéry</label>
-                    <input type="date" id="acting_at" name="acting_at" value="{{ $post->acting_at }}" class="form-control">
+                    <input type="date" id="acting_at" name="acting_at" class="form-control">
                 </div>
                 <div class="mb-3">
                     <label for="slug" class="form-label">Adresa traileru na YouTube</label>
@@ -213,6 +214,9 @@
             </script>
             <script>
                 $(document).ready(function() {
+                    var dbDate = "{{ $post->acting_at }}".split(' ');
+                    document.getElementById("acting_at").value = dbDate[0];
+
                     var imageList = $('#imageList');
                     var uploadForm = $('#uploadForm');
                     var uploadButton = $('#uploadButton');

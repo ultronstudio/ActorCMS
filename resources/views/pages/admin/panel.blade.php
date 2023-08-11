@@ -26,32 +26,5 @@
                 </div>
             </div>
         </div>
-        <div class="mt-5">
-            <h3>Poslední příspěvek</h3>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Název</th>
-                        <th>Odkaz</th>
-                        <th>Datum publikování</th>
-                        <th>Datum poslední aktualizace</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{ $last_post->title }}</td>
-                        <td><a
-                                href="{{ url('/' . $last_post->type . '/' . $last_post->slug) }}" target="_blank">/{{ $last_post->type }}/{{ $last_post->slug }}</a>
-                        </td>
-                        <td>
-                            {{ Carbon\Carbon::parse($last_post->created_at)->locale('cs')->isoFormat('DD. MMMM YYYY HH:mm:ss', 'Do MMMM YYYY HH:mm:ss') }}
-                        </td>
-                        <td>
-                            {{ Carbon\Carbon::parse($last_post->updated_at)->locale('cs')->isoFormat('DD. MMMM YYYY HH:mm:ss', 'Do MMMM YYYY HH:mm:ss') }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
 @endsection

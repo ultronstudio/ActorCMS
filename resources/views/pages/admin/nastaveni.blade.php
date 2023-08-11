@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="container">
-        <h3>Nastavení</h3>
+        <h1>Nastavení</h1>
         @if (session('error'))
             <div class="alert alert-danger alert-dismissible fade show mt-4 mb-4" role="alert">
                 {{ session('error') }}
